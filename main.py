@@ -20,5 +20,28 @@ def hangman():
 
     print("Welcome to Hangman Game!")
     print("Guess the word.")
+    while True:
+        print("\nWord:", display_word_progress(secret_word, guessed_letters))
+        guess = take_user_guess()
 
+        if guess in guessed_letters:
+            print("You already guessed that letter!")
+            continue
+
+        guessed_letters.append(guess)
+
+        if guess not in secret_word:
+            attempts -= 1
+            print("Incorrect guess! Attempts left:", attempts)
+            if attempts == 0:
+                print("Sorry, you're out of attempts. The word was:", secret_word)
+                break
+        else:
+            print("Correct guess!")
+            if all(letter in guessed_letters for letter in secret_word):
+                print("Congratulations! You guessed the word:", secret_word)
+                break
+
+if _name_ == "_main_":
+    hangman()
    
